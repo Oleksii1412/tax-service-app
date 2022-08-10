@@ -13,7 +13,7 @@ You can easily start and test this application from Heroku [link](https://akishe
 :computer: Second option: 
 Start application on your local computer.
 
-## :clipboard:How to run this application on your local computer
+## :clipboard: How to run this application on your local computer
 In this manual describes main steps for application running. 
 It's means you have installed already JDK package, add environment variables, maven etc.
 
@@ -26,7 +26,7 @@ It's means you have installed already JDK package, add environment variables, ma
 7. Start Tomcat.
 8. Test application after it has been successfully risen up.
 
-## :classical_building:What does the application do:
+## :white_check_mark: What does the application do:
 
 - **Authentication**, gives opportunity to log in or create a new account.
 - **Authorization**, gives you permission to access application functional and data.
@@ -48,11 +48,11 @@ It's means you have installed already JDK package, add environment variables, ma
 - Tomcat 9.0.50
 - JSTL 1.2
 
-## :ladder:Taxi service application presents a simple example of 3 layer level application:
+## :bricks:Taxi service application presents a simple example of 3 layer level application:
 
 - **Controller**: processes request from users.
 - **Service**: contains business logic of whole application.
 - **DAO**: operates data which stores in the DB.
 
-## :bricks:Uml diagram of DB tables relations
+## :bar_chart:Uml diagram of DB tables relations
 ![DB](https://user-images.githubusercontent.com/96411307/183914235-f8a7af84-cf9b-4fd9-b660-8a9f64d6adc8.png)
