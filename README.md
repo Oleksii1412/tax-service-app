@@ -18,8 +18,8 @@ Non-authorized users are able to:
 Authorized users are able to:
 
     - use full functionality of the service such as: 
-     :black_circle: view all drivers and their cars with manufacturers
-     :black_circle: add and delete new drivers, cars, manufacturers
+      -> view all drivers and their cars with manufacturers
+      -> add and delete new drivers, cars, manufacturers
 
 ## Project Structure
 
