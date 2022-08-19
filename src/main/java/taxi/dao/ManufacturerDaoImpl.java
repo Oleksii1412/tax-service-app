@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import taxi.exception.DataProcessingException;
 import taxi.lib.Dao;
 import taxi.model.Manufacturer;
@@ -15,6 +17,8 @@ import taxi.util.ConnectionUtil;
 
 @Dao
 public class ManufacturerDaoImpl implements ManufacturerDao {
+    private static final Logger LOGGER = LogManager.getLogger(ManufacturerDaoImpl.class);
+
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
         String query = "INSERT INTO manufacturers (name, country) VALUES (?,?)";
@@ -26,6 +30,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
             if (resultSet.next()) {
                 manufacturer.setId(resultSet.getObject(1, Long.class));
             }
+            LOGGER.info("A new manufacturer was created. Parameter: manufacturer " + manufacturer);
             return manufacturer;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't create manufacturer. " + manufacturer, e);
@@ -75,6 +80,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                         = setUpdate(connection.prepareStatement(query), manufacturer)) {
             statement.setLong(3, manufacturer.getId());
             statement.executeUpdate();
+            LOGGER.info("A manufacturer was updated. Parameter: manufacturer " + manufacturer);
             return manufacturer;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't update a manufacturer "
@@ -88,6 +94,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
+            LOGGER.info("A manufacturer with Parameter: id " + id + " was marked as unavailable");
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't delete a manufacturer by id " + id, e);

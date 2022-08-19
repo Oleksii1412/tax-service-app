@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import taxi.exception.DataProcessingException;
 import taxi.lib.Dao;
 import taxi.model.Car;
@@ -18,6 +20,7 @@ import taxi.util.ConnectionUtil;
 
 @Dao
 public class CarDaoImpl implements CarDao {
+    private static final Logger LOGGER = LogManager.getLogger(DriverDaoImpl.class);
     private static final int ZERO_PLACEHOLDER = 0;
     private static final int SHIFT = 2;
 
@@ -40,6 +43,7 @@ public class CarDaoImpl implements CarDao {
             throw new DataProcessingException("Can't create car " + car, e);
         }
         insertAllDrivers(car);
+        LOGGER.info("A new car was created. Parameter: car " + car);
         return car;
     }
 
@@ -112,6 +116,7 @@ public class CarDaoImpl implements CarDao {
         }
         deleteAllDriversExceptList(car);
         insertAllDrivers(car);
+        LOGGER.info("A car was updated. Parameter: car " + car);
         return car;
     }
 
@@ -123,6 +128,7 @@ public class CarDaoImpl implements CarDao {
                  PreparedStatement statement =
                          connection.prepareStatement(query)) {
             statement.setLong(1, id);
+            LOGGER.info("A car with Parameter: id " + id + " was marked as unavailable");
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't delete car by id " + id, e);
